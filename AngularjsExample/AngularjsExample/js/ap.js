@@ -1,7 +1,29 @@
-﻿var app = angular.module('MyApp', []);
+﻿var app = angular.module('MyApp', ['ngRoute']);
 
-app.controller('MainCtrl', function ($scope) {
+app.config(function ($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'Index.html'
+    })
+    .when('/dashboard', {
+        resolve: {
+            "check": function ($location, $rootScope) {
+                if (!$rootScope.isLoggedIn) {
+                    $location.path('/');
+                }
+            }
+        },
+        templateUrl: 'dashboard.html'
+    })
+    .otherwise({
+        redirectTo:'/'
+    });
+});
+
+app.controller('MainCtrl', function ($scope, $location, $rootScope) {
     $scope.name = 'World';
+    $rootScope.loggedInUser = '';
+    $scope.message = '';
     $scope.myusers = [{
         username: 'user1',
         password: '12323'
@@ -13,15 +35,18 @@ app.controller('MainCtrl', function ($scope) {
         if ($scope.username && $scope.password) {
             var user = $scope.username;
             var pass = $scope.password;
-            alert("welcome" + user);
-
-            $scope.myusers.push({
-                username: user,
-                password: pass
-            });
+            $scope.message = "welcome " + user;
+            $rootScope.isLoggedIn = true;
+            $rootScope.loggedInUser = user;
+            //$scope.myusers.push({
+            //    username: user,
+            //    password: pass
+            //});
             $("#loginModal").modal('hide');
+            $location.path('/dashboard');
+          //  console.log($location.path());
         } else {
-            alert("Invalid Login");
+            $scope.message = "Invalid Login";
         }
     }
 });

@@ -11,6 +11,7 @@
     <script src="scripts/jquery-1.9.1.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js" data-require="angular.js@1.0.x" data-semver="1.0.8"></script>-->
     <script src="js/index.js"></script>
     <script src="js/navbar.js"></script>
@@ -35,9 +36,11 @@
                         </ul>
                         <!-- right nav top -->
                         <ul class="nav navbar-nav pull-right">
-                            <li><a href="#" class="text-white"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;About Us</a></li>
+                            <li><a href="#" class="text-white"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;About Us</a></li>
                             <li><a href="#" class="text-white"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Contact Us</a></li>
-                            <li><a href="#" class="text-white" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                            <li><a ng-if="username.length==0" href="#" class="text-white" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                            <li><a href="#" ng-if="loggedInUser.length==0" class="text-white" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                            <li><a ng-if="loggedInUser.length>0" class="text-white" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ loggedInUser }}</a></li>
                         </ul>
                     </div>
                     <div class="dividline light-grey"></div>
@@ -68,7 +71,8 @@
                                     <li><a href="#">TheTeam</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;contact us</a></li>
-                                    <li><a href="#"  data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                                    <li ng-if="loggedInUser.length==0"><a  href="#"  data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                                    <li ng-if="loggedInUser.length>0"><a  href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ loggedInUser }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -92,6 +96,11 @@
                         </div>  
 
                         <section class="popupBody">
+                            <div class="row">
+                                <div class="col-lg-12 text-danger text-center">
+                                   {{ message }}
+                                </div>
+                            </div>
                             <!-- Social Login -->
                             <div class="social_login">
                                 <div class="">
