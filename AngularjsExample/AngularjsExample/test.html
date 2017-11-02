@@ -7,6 +7,8 @@
     <link href="scripts/jquery-ui.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <script src="scripts/jquery-1.9.1.min.js"></script>
+    <link href="scripts/jquery-ui.css" rel="stylesheet" />
+    <script src="scripts/jquery-ui-1.11.2.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
    
@@ -25,7 +27,39 @@
             $scope.removeData = function (index) {
                 $scope.dataarr.splice(index, 1);
             };
+            $scope.availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+            ];
+            $scope.complete = function (event) {
+               // alert(event.target.attributes.id.value);
+                $("#" + event.target.attributes.id.value).autocomplete({
+                    source: $scope.availableTags
+                });
+            }
+
         });
+        
 
     </script>
 </head>
@@ -50,7 +84,7 @@
                 <tbody>
                     <tr data-ng-repeat="data in dataarr">
                         <td>
-                            <input type="text" ng-model="data.code" name="" placeholder="Enter Code">
+                            <input type="text" ng-model="data.code" name="" ng-keyup="complete($event)" id="code{{$index}}" placeholder="Enter Code">
                         </td>
                         <td>
                             <input type="text" ng-model="data.name" name="" placeholder="Enter Name">

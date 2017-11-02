@@ -137,6 +137,7 @@
     </Content>
     <Content Include="scripts\jquery-ui-1.11.2.js" />
     <Content Include="scripts\jquery-ui-1.11.2.min.js" />
+    <Content Include="scripts\jquery-ui-1.8.21.custom.css" />
     <Content Include="scripts\jquery-ui.css" />
     <Content Include="scripts\version.json" />
     <Content Include="scripts\errors.json" />
@@ -970,7 +971,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="scripts\images\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
