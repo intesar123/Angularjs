@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+    <link href="scripts/jquery-ui.css" rel="stylesheet" />
+    <script src="scripts/jquery-ui-1.11.2.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script>
+  var app=angular.module('app',[]);
+  app.controller('ctrl',function($scope){
+   $scope.availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $scope.complete=function(){
+    $( "#tags" ).autocomplete({
+      source: $scope.availableTags
+    });
+    }
+  });
+    </script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+    <div class="ui-widget">
+        <label for="tags">Tags: </label>
+        <input id="tags" ng-keyup="complete()" />
+    </div>
+</body>
+</html>

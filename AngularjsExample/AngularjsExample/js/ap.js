@@ -3,9 +3,10 @@
 app.config(function ($routeProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'Index.html'
+        templateUrl: 'home.html'
     })
     .when('/dashboard', {
+       
         resolve: {
             "check": function ($location, $rootScope) {
                 if (!$rootScope.isLoggedIn) {
@@ -42,7 +43,7 @@ app.controller('MainCtrl', function ($scope, $location, $rootScope) {
             //    username: user,
             //    password: pass
             //});
-            $("#loginModal").modal('hide');
+            //$("#loginModal").modal('hide');
             $location.path('/dashboard');
           //  console.log($location.path());
         } else {
