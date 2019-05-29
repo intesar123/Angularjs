@@ -1,25 +1,27 @@
 ﻿var app = angular.module('MyApp', ['ngRoute']);
 
-app.config(function ($routeProvider) {
+app.config(['$routeProvider',function ($routeProvider) {
     $routeProvider
-    .when('/', {
-        templateUrl: 'home.html'
+    .when('/home', {
+        templateUrl: 'home.html',
+        controller:'MainCtrl'
     })
     .when('/dashboard', {
        
-        resolve: {
-            "check": function ($location, $rootScope) {
-                if (!$rootScope.isLoggedIn) {
-                    $location.path('/');
-                }
-            }
-        },
-        templateUrl: 'dashboard.html'
+        //resolve: {
+        //    "check": function ($location, $rootScope) {
+        //        if (!$rootScope.isLoggedIn) {
+        //            $location.path('/');
+        //        }
+        //    }
+        //},
+        templateUrl: 'dashboard.html',
+        controller: 'MainCtrl'
     })
     .otherwise({
-        redirectTo:'/'
+        redirectTo:'/home'
     });
-});
+}]);
 
 app.controller('MainCtrl', function ($scope, $location, $rootScope) {
     $scope.name = 'World';
